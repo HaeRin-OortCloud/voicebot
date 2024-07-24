@@ -6,8 +6,6 @@ from gtts import gTTS
 import base64
 import os
 from datetime import datetime
-import time
-from openai.error import RateLimitError
 
 def STT(audio):
     filename = "input.mp3"
@@ -119,19 +117,7 @@ def main():
                     st.write("")
             TTS(response)
 
-def ask_gpt(prompt, model, retries=5, delay=60):
-    for attempt in range(retries):
-        try:
-            response = openai.ChatCompletion.create(model=model, messages=prompt)
-            system_message = response["choices"][0]["message"]
-            return system_message["content"]
-        except RateLimitError as e:
-            if attempt < retries - 1:
-                st.warning(f"Rate limit exceeded. Retrying after {delay} seconds.")
-                time.sleep(delay)
-            else:
-                st.error("Exceeded maximum retries. Please try again later.")
-                raise
+
 
 if __name__ == "__main__":
     main()
