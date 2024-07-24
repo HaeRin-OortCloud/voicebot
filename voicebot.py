@@ -7,7 +7,7 @@ import base64
 import os
 from datetime import datetime
 
-def STT(audio):
+def STT(audio, retries=5, delay=60):
     filename = "input.mp3"
     wav_file = open(filename, "wb")
     wav_file.write(audio.tobytes())
@@ -63,7 +63,6 @@ def main():
     with st.expander("음성 비서 프로그램에 관하여", expanded=True):
         st.write(
             """
-            - 이해린이 만든 음성 비서 프로그램입니다. 
             - OpenAI API Key를 발급 받아 좌측 사이드바에 입력해야 작동합니다.
             - UI는 Streamlit을 활용했습니다.
             - STT(Speach-To-Text)는 OpenAI의 Whisper AI를 활용했습니다.
