@@ -7,7 +7,7 @@ import base64
 import os
 from datetime import datetime
 
-def STT(audio, retries=5, delay=60):
+def STT(audio):
     filename = "input.mp3"
     wav_file = open(filename, "wb")
     wav_file.write(audio.tobytes())
